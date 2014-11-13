@@ -1,0 +1,17 @@
+#! /bin/bash
+
+echo "The higher up the tree, the longer this can take..."
+paths=$( find . -type d -name .svn )
+
+for folder in $paths 
+do
+	# Remove the /.svn from the path
+	rootFolder=${folder%"/.svn"}
+	repoName="${rootFolder##*/}"
+
+	if [[ ! $repoName == *.lproj ]]; then
+		echo "Updating $repoName"
+		svn update $rootFolder
+	fi
+
+done

@@ -1,0 +1,6 @@
+#! /bin/bash
+
+cd $1
+
+commit=$( git svn log --limit=10000 | sed -n "/$2/,/-----$/ p" | head -n 5 | sed '/-----------------/q' )
+echo "$commit" | sed '$ d'
