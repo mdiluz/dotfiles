@@ -13,8 +13,12 @@ shopt -s checkwinsize
 HISTSIZE=1000
 HISTFILESIZE=2000
 
+# Colours
+export CLICOLOR=1
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+
 # Set my editor to nano
-export EDITOR=/usr/bin/nano
+export EDITOR=nano
 
 # Add by own bin
 PATH="$HOME/bin:$PATH"

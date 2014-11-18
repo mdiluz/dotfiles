@@ -7,9 +7,14 @@ alias open=xdg-open
 alias gitsvnup="git stash && git svn rebase && git stash pop && alert"
 alias gitsvnpush="git stash && git svn dcommit && git stash pop && alert"
 
+# pretty log
+alias lg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+# hard reset an svn working copy
+alias svnhardreset='read -p "destroy all local changes?[y/N]" && [[ $REPLY =~ ^[yY] ]] && svn revert . -R && rm -rf $(awk -f <(echo "/^?/{print \$2}") <(svn status) ;)'
+
 function gitsvnfind()
 {
-	cdev
 	hash=$(git svn find-rev r${1})
 	git show $hash 
 }
@@ -37,6 +42,12 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # Edit a file in qtcreator
 alias qtedit="qtcreator -client"
+
+# OSX - check an apps codesigning
+alias checkcodesignosx="codesign -dvv --entitlements -"
+
+# OSX - quick fixes
+alias flushdnsosx="dscacheutil -flushcache"
 
 # Source in feral specific aliases if they exist
 test -e ~/.feral_aliases && source ~/.feral_aliases

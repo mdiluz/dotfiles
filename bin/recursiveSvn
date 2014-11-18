@@ -1,17 +1,43 @@
 #! /bin/bash
 
-echo "The higher up the tree, the longer this can take..."
+ocho -p =
+ocho "Finding svn repositories"
 paths=$( find . -type d -name .svn )
 
-for folder in $paths 
-do
-	# Remove the /.svn from the path
-	rootFolder=${folder%"/.svn"}
-	repoName="${rootFolder##*/}"
+# Path array to fill with svn repositories
+pathsArray=()
 
-	if [[ ! $repoName == *.lproj ]]; then
-		echo "Updating $repoName"
-		svn update $rootFolder
+lastpath='\0'
+for path in $paths 
+do
+	# We want to ignore all sub directories that are also svn repositories
+	if [[ $path == $lastpath* ]] ; then
+		continue
 	fi
 
+	# Remove the .svn component from the path
+	lastpath=${path%"/.svn"}
+
+	# Store this path
+	pathsArray+=($lastpath) 
 done
+
+# Output the repositories
+ocho -p =
+ocho Full update list 
+ocho ${pathsArray[@]}
+ocho -p =
+
+revision=$(svn info $pathsArray | grep ^Revision | awk '{print $2}')
+
+# Prompt for input
+read -p "Update to revision $revision? [y/N] " && [[ $REPLY =~ ^[yY] ]] && if [ true ]; then
+	for folder in ${pathsArray[@]}
+	do
+		echo "Updating $folder"
+		svn update $folder -r $revision
+
+	done
+
+	ocho -s "RecursiveSvn Finished"
+fi
