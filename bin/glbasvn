@@ -1,6 +1,6 @@
 #! /bin/bash
+# Get Last commit By Author in Svn
+# Will get the last commit by an author in svn
 
-cd $1
-
-commit=$( git svn log --limit=10000 | sed -n "/$2/,/-----$/ p" | head -n 5 | sed '/-----------------/q' )
+commit=$( git svn log --limit=10000 | sed -n "/$1/,/-----$/ p" | head -n 5 | sed '/-----------------/q' )
 echo "$commit" | sed '$ d'
