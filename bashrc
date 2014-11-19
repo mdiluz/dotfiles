@@ -23,6 +23,7 @@ export EDITOR=nano
 # Add our custom dotfiles
 if [ -f ~/.dotfilesdir ]; then
     source ~/.dotfilesdir
+    DOTFILESTEMPDIR="$DOTFILESDIR/.tmp"
     PATH="$DOTFILESDIR/bin:$PATH"
     PERL5LIB="$DOTFILESDIR/perl:$PERL5LIB"
 fi
