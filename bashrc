@@ -22,6 +22,7 @@ export EDITOR=nano
 
 # Add by own bin
 PATH="$HOME/bin:$PATH"
+PERL5LIB="$HOME/dotfiles/perl:$PERL5LIB"
 
 # ======================================================================================================================
 # Pull in feral specific stuff
