@@ -1,0 +1,5 @@
+#! /usr/bin/perl
+
+# Test the ecco module
+use ecco qw(ecco_test);
+ecco_test;
