@@ -4,9 +4,9 @@
 LOCKFILE="/home/mdiluzio/.shutdownlock"
 
 if [ -e "$LOCKFILE" ]; then
-	echo Cannot shutdown - lockfile exists
+	ecco Cannot shutdown - lockfile exists
 else
-	echo Shutting down
+	ecco Shutting down
 	shutdown
 fi
 
