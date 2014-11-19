@@ -1,43 +1,77 @@
-#! /bin/bash
+#! /usr/bin/perl
+# Find all svn working copies within the current working directory and update them
+# TODO: Use the same revision number if all working copies come from the same repository
+# TODO: Use threads for each update
 
-ocho -p =
-ocho "Finding svn repositories"
-paths=$( find . -type d -name .svn )
+use strict;
+use warnings;
 
-# Path array to fill with svn repositories
-pathsArray=()
+# ====================================================================================
+# File rule finding
+use File::Find::Rule;
 
-lastpath='\0'
-for path in $paths 
-do
-	# We want to ignore all sub directories that are also svn repositories
-	if [[ $path == $lastpath* ]] ; then
-		continue
-	fi
+# Current working directory
+use Cwd;
 
-	# Remove the .svn component from the path
-	lastpath=${path%"/.svn"}
+# For printing
+use feature qw(say);
 
-	# Store this path
-	pathsArray+=($lastpath) 
-done
+# ====================================================================================
+# Get all directories matching filter
+sub getAllDirectories 
+{
+	my $directory = shift;
+	my $filter = shift;
 
-# Output the repositories
-ocho -p =
-ocho Full update list 
-ocho ${pathsArray[@]}
-ocho -p =
+	my $dirrule = File::Find::Rule->new;
+    $dirrule->directory;
+    $dirrule->name( $filter );
 
-revision=$(svn info $pathsArray | grep ^Revision | awk '{print $2}')
+    return $dirrule->in( $directory );
+}
 
-# Prompt for input
-read -p "Update to revision $revision? [y/N] " && [[ $REPLY =~ ^[yY] ]] && if [ true ]; then
-	for folder in ${pathsArray[@]}
-	do
-		echo "Updating $folder"
-		svn update $folder -r $revision
+# ====================================================================================
+# Filter out any child directories in a list
+sub removeAllChildDirectories
+{
+	# Sort directories (otherwise iteration will not work as intended)
+	my @dirs = sort @_;
 
-	done
+	my @outdirs=();
 
-	ocho -s "RecursiveSvn Finished"
-fi
+	my $lastPath = "\0";
+	foreach my $path (@dirs)
+    {
+        if ( $path =~ /^$lastPath/ )
+        {
+        	next;
+        }
+
+        $lastPath = $path;
+        push(@outdirs,$lastPath)
+    }
+
+	return @outdirs;
+}
+
+# ====================================================================================
+# Main function
+sub recursivelyUpdateSVN
+{
+	our @dirs = getAllDirectories(getcwd,".svn");
+
+	# Remove all .svn components of paths
+	foreach my $dir (@dirs)
+	{
+	    $dir =~ s/.svn$//;
+	}
+
+	@dirs = removeAllChildDirectories(@dirs);
+
+	# Call svn update on each directory
+	foreach our $dir (sort @dirs)
+	{
+		system("svn","update",$dir);
+	}
+}
+recursivelyUpdateSVN;
