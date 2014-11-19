@@ -1,7 +1,7 @@
 #! /bin/bash
 # Script to attempt a shutdown if there is no lock file
 
-LOCKFILE="$DOTFILESTEMPDIR/.tmp/.shutdownlock"
+LOCKFILE="/tmp/.shutdownlock"
 
 if [ -e "$LOCKFILE" ]; then
 	ecco Cannot shutdown - lockfile exists
