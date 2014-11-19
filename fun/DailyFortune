@@ -1,0 +1,100 @@
+#! /bin/bash
+# Fun script to send fortunes to co-workers
+
+#SUBSCRIBERS=(mdiluzio@feralinteractive.com ghuws@feralinteractive.com bellis@feralinteractive.com oboustead@feralinteractive.com fbryant@feralinteractive.com hkosobucki@feralinteractive.com kingram@feralinteractive.com hrose@feralinteractive.com junthank@feralinteractive.com sstinson@feralinteractive.com aaiton@feralinteractive.com ahay@feralinteractive.com dfeargrieve@feralinteractive.com twilkins@feralinteractive.com spatel@feralinteractive.com aprapasapong@feralinteractive.com)
+SUBSCRIBERS=(mdiluzio@feralinteractive.com)
+
+if [ ! $( which fortune ) ]; then
+	eccoe "fortune not installed"
+	exit 1
+fi
+
+if [ ! $( which cowsay ) ]; then
+	eccoe "cowsay not installed"
+	exit 1
+fi
+
+if [ ! -n "$SUBSCRIBERS" ]; then
+	eccoe "must set \$SUBSCRIBERS to array at top of this file"
+	exit 1
+fi 
+
+ecco "SENDING TO ${SUBSCRIBERS[*]}"
+ecco "ARE YOU SURE?"
+read
+ecco "REALY!?"
+read
+
+for name in ${SUBSCRIBERS[@]}; do
+
+	# Random modifier for the coß
+	case `jot -r 1 0 9` in
+		0) arg="" ;;
+		1) arg="-b" ;;
+		2) arg="-d" ;;
+		3) arg="-g" ;;
+		4) arg="-p" ;;
+		5) arg="-s" ;;
+		6) arg="-t" ;;
+		7) arg="-w" ;;
+		8) arg="-y" ;;
+	esac
+
+	# Random text colour
+	case `jot -r 1 0 9` in
+		0) colour="Red" ;;
+		1) colour="Blue" ;;
+		2) colour="Green" ;;
+		3) colour="Yellow" ;;
+		4) colour="Pink" ;;
+		5) colour="Orange" ;;
+		6) colour="Purple" ;;
+		7) colour="Gold" ;;
+		8) colour="Chocolate" ;;
+		9) colour="Charteuse" ;;
+	esac	
+
+	# Random website link
+	case `jot -r 1 0 6` in
+		0) lnk="http://en.wikipedia.org/wiki/Kermit_the_Frog" ;;
+		1) lnk="http://en.wikipedia.org/wiki/Kermit_Roosevelt" ;;
+		2) lnk="http://en.wikipedia.org/wiki/Kermit,_Texas" ;;
+		3) lnk="http://en.wikipedia.org/wiki/Kermit,_West_Virginia" ;;
+		4) lnk="http://en.wikipedia.org/wiki/Thai_eggplant" ;;
+		5) lnk="http://en.wikipedia.org/wiki/Kermit_(given_name)" ;;
+		6) lnk="http://en.wikipedia.org/wiki/Kermit" ;;
+	esac
+
+	output="$( fortune -a | cowsay $arg -f `ls /usr/share/cowsay/cows | shuf -n 1`)"
+
+	subject=$(echo Your Daily Fortune $(date +%d/%m/20%y))
+
+	echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">
+<html>
+<head>
+<meta http-equiv=\"content-type\" content=\"text/html\">
+<title>email.html</title>
+</head>
+<body>
+<pre style=\"font-family:Courier New;font-size:10pt;\">
+<font color="$colour"><b>
+$output
+	
+</font>
+<font color="Black"></b>
+------------------------------------------------
+<b> Your Daily Fortune</b> (tm) 
+ Brought to you by <a href="$lnk">The Daily Fortune & Co</a>!
+</font>
+</pre>
+
+</body>
+</html>
+" > /tmp/fortune.html
+
+	ecco "SENDING to $name"
+	cat /tmp/fortune.html
+
+	mail -s "$( echo -e "$subject\nContent-Type: text/html")" $name < /tmp/fortune.html
+	eccos "SENT"
+done
