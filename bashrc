@@ -20,9 +20,12 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 # Set my editor to nano
 export EDITOR=nano
 
-# Add by own bin
-PATH="$HOME/bin:$PATH"
-PERL5LIB="$HOME/dotfiles/perl:$PERL5LIB"
+# Add our custom dotfiles
+if [ -f ~/.dotfilesdir ]; then
+    source ~/.dotfilesdir
+    PATH="$DOTFILESDIR/bin:$PATH"
+    PERL5LIB="$DOTFILESDIR/perl:$PERL5LIB"
+fi
 
 # ======================================================================================================================
 # Pull in feral specific stuff
