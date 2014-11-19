@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Open with xdg
+if [ $( which xdg-open ) ]; then
 alias open=xdg-open
+fi
 
 # git-svn commands
 alias gitsvnup="git stash && git svn rebase && git stash pop && alert"
