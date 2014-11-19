@@ -1,3 +1,5 @@
+#! /bin/bash
+
 # The two files
 FILE="$1"
 BACKUP="$FILE.bkp"
