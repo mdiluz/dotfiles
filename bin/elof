@@ -1,3 +1,4 @@
+#! /bin/bash
 # Short script to do command on each line of file
 
 file=$1
