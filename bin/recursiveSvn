@@ -5,6 +5,7 @@
 
 use strict;
 use warnings;
+use ecco qw(ecco);
 
 # ====================================================================================
 # File rule finding
@@ -12,9 +13,6 @@ use File::Find::Rule;
 
 # Current working directory
 use Cwd;
-
-# For printing
-use feature qw(say);
 
 # ====================================================================================
 # Get all directories matching filter
@@ -58,6 +56,7 @@ sub removeAllChildDirectories
 # Main function
 sub recursivelyUpdateSVN
 {
+	ecco "Fetching all svn working copies";
 	our @dirs = getAllDirectories(getcwd,".svn");
 
 	# Remove all .svn components of paths
@@ -66,8 +65,10 @@ sub recursivelyUpdateSVN
 	    $dir =~ s/.svn$//;
 	}
 
+	ecco "Filtering out subdirectories";
 	@dirs = removeAllChildDirectories(@dirs);
 
+	ecco "Updating all working copies";
 	# Call svn update on each directory
 	foreach our $dir (sort @dirs)
 	{
