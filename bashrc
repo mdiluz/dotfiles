@@ -20,6 +20,9 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 # Set my editor to nano
 export EDITOR=nano
 
+# Add custom bin
+PATH="$HOME/bin:$PATH"
+
 # Add our custom dotfiles
 if [ -f ~/.dotfilesdir ]; then
     source ~/.dotfilesdir
