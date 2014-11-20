@@ -7,7 +7,7 @@ use warnings;
 
 # Export functions
 use Exporter qw(import);
-our @EXPORT_OK = qw(ecco eccow eccoe eccos ecco_test);
+our @EXPORT_OK = qw(ecco_visual_test ecco eccow eccoe eccos);
 
 # Needed features
 use Term::ANSIColor ':constants';
@@ -38,11 +38,15 @@ sub eccos
 }
 
 # test the ecco module
-sub ecco_test
+sub ecco_visual_test
 {
+	print "Expect \"BLUE\" in blue\n";
 	ecco "BLUE";
+	print "Expect \"WARNING: YELLOW\" in yellow\n";
 	eccow "YELLOW";
+	print "Expect \"ERROR: RED\" in red\n";
 	eccoe "RED";
+	print "Expect \"SUCCESS: GREEN\" in green\n";
 	eccos "GREEN";
 }
 
