@@ -24,11 +24,8 @@ export EDITOR=nano
 PATH="$HOME/bin:$PATH"
 
 # Add our custom dotfiles
-if [ -f ~/.dotfilesdir ]; then
-    source ~/.dotfilesdir
-    PATH="$DOTFILESDIR/bin:$PATH"
-    PERL5LIB="$DOTFILESDIR/perl:$PERL5LIB"
-fi
+PATH="$DOTFILESDIR/bin:$PATH"
+PERL5LIB="$DOTFILESDIR/perl:$PERL5LIB"
 
 # ======================================================================================================================
 # Pull in feral specific stuff
@@ -43,12 +40,10 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 # Pull in my aliases
-test -f ~/.bash_aliases && source ~/.bash_aliases
+test -f $DOTFILESDIR/bash_aliases && source $DOTFILESDIR/bash_aliases
 
+# If we have colour support
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-    # We have color support; assume it's compliant with Ecma-48
-    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-    # a case would tend to support setf rather than setaf.)
     color_prompt=yes
 else
     color_prompt=
@@ -64,7 +59,7 @@ else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 
-unset color_prompt force_color_prompt
+unset color_prompt
 
 # ======================================================================================================================
 
@@ -76,15 +71,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
 
 # ======================================================================================================================
 # Label if I'm running from within the steam runtime
