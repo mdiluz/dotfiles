@@ -5,7 +5,9 @@ use warnings;
 use ecco qw(ecco eccow);
 
 # File rule finding
-use File::Find::Rule;
+use File::Find::Rule; 
+use File::Basename;
+
 
 # Current working directory
 use Cwd;
@@ -16,15 +18,7 @@ use POSIX qw/strftime/;
 our $archive_suffix="_archive";
 our $time = strftime('%d-%m-%Y',localtime);
 
-# Get base name for directory path
-sub getbasename
-{
-	my $path = shift;
-	$path =~ s/\/$//;
-	$path =~ s/^.*\///;
-	return $path;
-}
-
+# archive method
 sub archive
 {
 	# Allow for arrays to be given as a parameter
@@ -41,7 +35,7 @@ sub archive
 	    # if we have objects to move
 	    if( scalar(@objects) )
 	    {
-		    my $newDir = $path."/".getbasename($path)."_".$time.$archive_suffix;
+		    my $newDir = $path."/".basename($path)."_".$time.$archive_suffix;
 
 			ecco "Creating directory $newDir";
 		    system("mkdir","$newDir");
