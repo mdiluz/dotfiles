@@ -2,7 +2,39 @@
 use strict;
 use warnings;
 
-# Test the ecco module
-print "Testing ecco module\n";
-use ecco qw(ecco_test);
-ecco_test;
+print "================================\n";
+print "The following are visual tests\n";
+# Test the ecco module (visual check)
+use ecco qw(ecco_visual_test ecco eccoe eccos);
+ecco_visual_test;
+
+# Pull in testing function
+use perltest qw(perltest_test testfunction);
+
+print "================================\n";
+print "The following are automated tests\n";
+
+my $res = 0;
+
+# Test the testing function itself
+$res += 1 if testfunction( "Test the testing intended success", 0, \&perltest_test );
+$res += 1 if !testfunction( "Test the tester intended failure", 1, \&perltest_test );
+
+# Test 
+use pathtools qw(pathtools_test_single pathtools_test_array);
+$res += 1 if testfunction( "pathtools single params", 0, \&pathtools_test_single );
+$res += 1 if testfunction( "pathtools multiple params", 0, \&pathtools_test_array );
+
+print "================================\n";
+
+# Summarise tests
+if ($res > 0)
+{
+	print "ERROR: Tests failed\n";
+}
+else
+{
+	print "SUCESS: Tests succeeded\n";
+}
+
+exit $res;
