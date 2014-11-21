@@ -6,7 +6,7 @@ use Cwd;
 use ecco qw(ecco eccoe);
 use pathtools qw(fixUpPaths);
 
-our $tmpfile = "/tmp/copyGitState.patch";
+our $tmpfile = `mktemp /tmp/copygitstate.XXXXXXXXXXXX`;
 our $USAGE="Usage - copyGitState {[source] [destination] / [destination]}";
 
 our $source 		= shift;
