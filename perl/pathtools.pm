@@ -36,6 +36,9 @@ sub fixUpPaths
 		{
 			$path =~ s/^/$cwd\//;
 		}
+
+		# Remove all double slashes
+		$path =~ s/\/\//\//g;
 	}
 }
 
@@ -70,6 +73,7 @@ sub swapBasePath
 			$path =~ s/^$baseTwo/$baseOne/;
 		}
 	}
+
 }
 
 1; # True statement
