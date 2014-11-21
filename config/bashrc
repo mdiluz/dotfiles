@@ -40,7 +40,7 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 # Pull in my aliases
-test -f $DOTFILESDIR/bash_aliases && source $DOTFILESDIR/bash_aliases
+test -f $DOTFILESDIR/config/bash_aliases && source $DOTFILESDIR/config/bash_aliases
 
 # If we have colour support
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
