@@ -89,22 +89,22 @@ print "The following are automated tests\n";
 
 # ======================
 # pathtools module tests
-use pathtools qw(getFullPath swapBasePath);
+use pathtools qw(fixUpPaths swapBasePath);
 
 # Test non-array functions
-testfunction1to1( 1, "getFullPath with .", \&getFullPath, ".", getcwd );
-testfunction1to1( 1, "getFullPath with ./thing", \&getFullPath, "./thing", getcwd."/thing" );
-testfunction1to1( 1, "getFullPath with thing", \&getFullPath, "thing", getcwd."/thing" );
+testfunction1to1( 1, "fixUpPaths with .", \&fixUpPaths, ".", getcwd );
+testfunction1to1( 1, "fixUpPaths with ./thing", \&fixUpPaths, "./thing", getcwd."/thing" );
+testfunction1to1( 1, "fixUpPaths with thing", \&fixUpPaths, "thing", getcwd."/thing" );
 testfunctionManytoMany( 1, "swapBasePath with single param", \&swapBasePath , 3 , ".", "/other/test/path", "thing" , 3 , ".", "/other/test/path", "/other/test/path/thing" );
 
 # Test pathing functions with arrays
 my @paths1=(".","./thing","thing");
 my @paths2=(getcwd,getcwd."/thing",getcwd."/thing");
-testfunctionManytoMany(1, "getFullPath with array parameter", \&getFullPath, scalar(@paths1), @paths1, scalar(@paths2), @paths2 );
+testfunctionManytoMany(1, "fixUpPaths with array parameter", \&fixUpPaths, scalar(@paths1), @paths1, scalar(@paths2), @paths2 );
 
 my @paths=(".", "/other/test/path" , "thing","/stuff/thats/not/in/path","./thing","/other/test/path/otherPath");
 my @pathsresult=( ".", "/other/test/path", "/other/test/path/thing","/stuff/thats/not/in/path","/other/test/path/thing",getcwd."/otherPath");
-testfunctionManytoMany(1, "getFullPath with array parameter", \&swapBasePath, scalar(@paths), @paths, scalar(@pathsresult), @pathsresult );
+testfunctionManytoMany(1, "fixUpPaths with array parameter", \&swapBasePath, scalar(@paths), @paths, scalar(@pathsresult), @pathsresult );
 
 # =================================================================
 print "================================\n";

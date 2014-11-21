@@ -4,7 +4,7 @@ use warnings;
 
 use Cwd;
 use ecco qw(ecco eccoe);
-use pathtools qw(correctForFullStop);
+use pathtools qw(fixUpPaths);
 
 our $tmpfile = "/tmp/copyGitState.patch";
 our $USAGE="Usage - copyGitState {[source] [destination] / [destination]}";
@@ -28,7 +28,7 @@ if ( ! $destination )
 }
 
 # Adjust "." paths
-correctForFullStop( ($source,$destination) );
+fixUpPaths( ($source,$destination) );
 
 # If dest and src are the same
 if ( $destination eq $source )

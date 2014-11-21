@@ -8,14 +8,14 @@ no warnings 'experimental::smartmatch';
 
 # Export functions
 use Exporter qw(import);
-our @EXPORT_OK = qw(pathtools_test_single pathtools_test_array getFullPath appendSlash swapBasePath);
+our @EXPORT_OK = qw(pathtools_test_single pathtools_test_array fixUpPaths appendSlash swapBasePath);
 
 # Use ecco
-use ecco qw(ecco ecco);
+use ecco qw(ecco ecco eccow);
 use Cwd;
 
 # Make sure when given a "." path we use the cwd
-sub getFullPath
+sub fixUpPaths
 {
 	foreach my $path (@_)
 	{	
@@ -52,9 +52,9 @@ sub swapBasePath
 	my $baseTwo = shift;
 
 	# Correct for fullstops
-	getFullPath($baseOne); 
-	getFullPath($baseTwo);
-	getFullPath(@_);
+	fixUpPaths($baseOne); 
+	fixUpPaths($baseTwo);
+	fixUpPaths(@_);
 
 	appendSlash($baseOne);
 	appendSlash($baseTwo);
