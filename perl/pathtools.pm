@@ -8,41 +8,68 @@ no warnings 'experimental::smartmatch';
 
 # Export functions
 use Exporter qw(import);
-our @EXPORT_OK = qw(pathtools_test_single pathtools_test_array correctForFullStop);
+our @EXPORT_OK = qw(pathtools_test_single pathtools_test_array getFullPath appendSlash swapBasePath);
 
 # Use ecco
 use ecco qw(ecco ecco);
 use Cwd;
 
 # Make sure when given a "." path we use the cwd
-sub correctForFullStop
+sub getFullPath
 {
 	foreach my $path (@_)
 	{	
+		my $cwd = getcwd;
+
+		# Adjust for single dot
 		if ( $path eq "." )
 		{
-			$path = getcwd;
+			$path = $cwd;
+		}
+		# Adjust for ./
+		elsif ( $path =~ m/^\.\// )
+		{
+			$path =~ s/^\.\//$cwd\//;
+		}
+		# adjust for not starting in /
+		elsif ( $path =~ m/^[^\/]/ )
+		{
+			$path =~ s/^/$cwd\//;
 		}
 	}
 }
 
-# Test single parameter functions
-sub pathtools_test_single
+# Append a slash if not one already
+sub appendSlash
 {
-	my $path=".";
-	correctForFullStop($path);
-
-	return !( $path eq getcwd )
+	$_[0] =~ s/([^\/])$/$1\//;
 }
 
-# Test multipl parameter functions
-sub pathtools_test_array
+# Swap out the base path of a full path given two alternate bases
+sub swapBasePath
 {
-	my @paths1=(".");
-	my @paths2=(getcwd);
-	correctForFullStop(@paths1);
+	my $baseOne = shift;
+	my $baseTwo = shift;
 
-	return !( @paths1 ~~ @paths2 );
+	# Correct for fullstops
+	getFullPath($baseOne); 
+	getFullPath($baseTwo);
+	getFullPath(@_);
+
+	appendSlash($baseOne);
+	appendSlash($baseTwo);
+
+	foreach my $path (@_)
+	{	
+		if ( $path =~ m/^$baseOne/ )
+		{
+			$path =~ s/^$baseOne/$baseTwo/;
+		}
+		elsif ( $path =~ m/^$baseTwo/ )
+		{
+			$path =~ s/^$baseTwo/$baseOne/;
+		}
+	}
 }
 
 1; # True statement
