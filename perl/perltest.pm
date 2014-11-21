@@ -77,16 +77,19 @@ sub _testfunction
 	return $fail;
 }
 
+# no input and 1 output
 sub testfunction0to1
 {
 	_testfunction(shift,shift,shift,0,1,shift);
 }
 
+# 1 input 1 output
 sub testfunction1to1
 {
 	_testfunction(shift,shift,shift,1,shift,1,shift);
 }
 
+# 1 input many outputs
 sub testfunction1toMany
 {
 	my $inline = shift;
@@ -97,6 +100,7 @@ sub testfunction1toMany
 	_testfunction($inline,$name,$function,1,$input,$num,@_);
 }
 
+# many inputs 1 output
 sub testfunctionManyto1
 {
 	my $inline = shift;
@@ -112,16 +116,19 @@ sub testfunctionManyto1
 	_testfunction($inline,$name,$function,$num,@input,1,$expect);
 }
 
+# many inputs and many outputs
 sub testfunctionManytoMany
 {
 	_testfunction(@_);
 }
 
+# get the full test results
 sub getTestsResult
 {
 	return $testingResult
 }
 
+# reset the test results
 sub resetTestsResult
 {
 	$testingResult = 0;
