@@ -1,9 +1,6 @@
 #! /bin/bash
 # Fun script to send fortunes to co-workers
 
-#SUBSCRIBERS=(mdiluzio@feralinteractive.com ghuws@feralinteractive.com bellis@feralinteractive.com oboustead@feralinteractive.com fbryant@feralinteractive.com hkosobucki@feralinteractive.com kingram@feralinteractive.com hrose@feralinteractive.com junthank@feralinteractive.com sstinson@feralinteractive.com aaiton@feralinteractive.com ahay@feralinteractive.com dfeargrieve@feralinteractive.com twilkins@feralinteractive.com spatel@feralinteractive.com aprapasapong@feralinteractive.com)
-SUBSCRIBERS=(mdiluzio@feralinteractive.com)
-
 if [ ! $( which fortune ) ]; then
 	eccoe "fortune not installed"
 	exit 1
@@ -11,6 +8,11 @@ fi
 
 if [ ! $( which cowsay ) ]; then
 	eccoe "cowsay not installed"
+	exit 1
+fi
+
+if [ ! $( which jot ) ]; then
+	eccoe "jot not installed"
 	exit 1
 fi
 
@@ -24,6 +26,8 @@ ecco "ARE YOU SURE?"
 read
 ecco "REALY!?"
 read
+
+TEMPFILE=`mktemp /tmp/DailyFortuneEmail.XXXXXXXXXXXX`
 
 for name in ${SUBSCRIBERS[@]}; do
 
@@ -65,7 +69,7 @@ for name in ${SUBSCRIBERS[@]}; do
 		6) lnk="http://en.wikipedia.org/wiki/Kermit" ;;
 	esac
 
-	output="$( fortune -a | cowsay $arg -f `ls /usr/share/cowsay/cows | shuf -n 1`)"
+	output="$( fortune | cowsay $arg -f `ls /usr/share/cowsay/cows | shuf -n 1`)"
 
 	subject=$(echo Your Daily Fortune $(date +%d/%m/20%y))
 
@@ -90,11 +94,11 @@ $output
 
 </body>
 </html>
-" > /tmp/fortune.html
+" > $TEMPFILE
 
 	ecco "SENDING to $name"
-	cat /tmp/fortune.html
+	cat $TEMPFILE
 
-	mail -s "$( echo -e "$subject\nContent-Type: text/html")" $name < /tmp/fortune.html
+	mail -s "$( echo -e "$subject\nContent-Type: text/html")" $name < $TEMPFILE
 	eccos "SENT"
 done
