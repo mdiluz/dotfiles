@@ -1,4 +1,0 @@
-#! /usr/bin/awk -f
-BEGIN { print "file\towner" }
-{ print $9 "\t" $3 }
-END { print " -DONE -" }
