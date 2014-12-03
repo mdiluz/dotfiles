@@ -1,10 +1,11 @@
 #! /bin/bash
+
 FILE="$1"
 # file/folder to backup
 
 # early out
 if [ ! -e $FILE ]; then
-	eccoe "$FILE does not exist"
+	echo ":ERROR: $FILE does not exist"
 	exit 0
 fi
 
@@ -12,7 +13,7 @@ BACKUP="$FILE.bkp"
 FORCED="$2"
 
 if [ ! -e $FILE ]; then
-	eccoe "$FILE does not exist to create backup"
+	echo ":ERROR: $FILE does not exist to create backup"
 	exit 0;
 fi
 
@@ -30,10 +31,10 @@ else
 fi
 
 if [ "$bkp" == "1" ]; then 
-	ecco "Backing up $FILE"
-	ecco "running command rsync -au $FILE $BACKUP"
+	echo ":: Backing up $FILE"
+	echo ":: running command rsync -au $FILE $BACKUP"
 	
 	rsync -au $FILE $BACKUP
 else
-	eccoe "aborting backup"
+	echo ":ERROR: aborting backup"
 fi

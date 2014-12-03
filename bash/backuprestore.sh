@@ -6,7 +6,7 @@ BACKUP="$FILE.bkp"
 FORCED="$2"
 
 if [ ! -e $BACKUP ]; then
-	ecco "$BACKUP does not exist to restore from"
+	echo ":: $BACKUP does not exist to restore from"
 	exit 0;
 fi
 
@@ -14,7 +14,7 @@ bkp="0"
 
 # ask if we haven't forced
 if [ ! -n "$FORCED" ]; then
-	read -p "$( ecco "Are you sure you want to restore from \'$BACKUP\' ? [yN]:" )" yn
+	read -p "$( echo ":: Are you sure you want to restore from \'$BACKUP\' ? [yN]:" )" yn
 	case $yn in
 	    [Yy]* ) bkp="1";;
 	    [Nn]* ) bkp="0";;
@@ -24,10 +24,10 @@ else
 fi
 
 if [ "$bkp" == "1" ]; then 
-	ecco "Restoring backup"
-	ecco "running command rsync -au $BACKUP $FILE"
+	echo ":: Restoring backup"
+	echo ":: running command rsync -au $BACKUP $FILE"
 
 	rsync -au $BACKUP $FILE
 else
-	ecco "aborting backup"
+	echo ":: aborting backup"
 fi

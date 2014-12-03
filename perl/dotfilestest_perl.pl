@@ -16,11 +16,11 @@ print "The following are visual tests\n";
 # Test the ecco module (visual check)
 print "Expect \"BLUE\" in blue\n";
 ecco "BLUE";
-print "Expect \"WARNING: YELLOW\" in yellow\n";
+print "Expect \"YELLOW\" in yellow\n";
 eccow "YELLOW";
-print "Expect \"ERROR: RED\" in red\n";
+print "Expect \"RED\" in red\n";
 eccoe "RED";
-print "Expect \"SUCCESS: GREEN\" in green\n";
+print "Expect \"GREEN\" in green\n";
 eccos "GREEN";
 
 #TODO: ask for user input?

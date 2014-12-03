@@ -4,9 +4,9 @@
 LOCKFILE="/tmp/.shutdownlock"
 
 if [ -e "$LOCKFILE" ]; then
-	ecco Cannot shutdown - lockfile exists
+	echo ":: Cannot shutdown - lockfile exists"
 else
-	ecco Shutting down
+	echo ":: Shutting down"
 	shutdown
 fi
 
