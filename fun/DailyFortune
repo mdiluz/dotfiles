@@ -2,29 +2,29 @@
 # Fun script to send fortunes to co-workers
 
 if [ ! $( which fortune ) ]; then
-	eccoe "fortune not installed"
+	echo ":ERROR: fortune not installed"
 	exit 1
 fi
 
 if [ ! $( which cowsay ) ]; then
-	eccoe "cowsay not installed"
+	echo ":ERROR: cowsay not installed"
 	exit 1
 fi
 
 if [ ! $( which jot ) ]; then
-	eccoe "jot not installed"
+	echo ":ERROR: jot not installed"
 	exit 1
 fi
 
 if [ ! -n "$SUBSCRIBERS" ]; then
-	eccoe "must set \$SUBSCRIBERS to array at top of this file"
+	echo ":ERROR: must set \$SUBSCRIBERS to array at top of this file"
 	exit 1
 fi 
 
-ecco "SENDING TO ${SUBSCRIBERS[*]}"
-ecco "ARE YOU SURE?"
+echo ":: SENDING TO ${SUBSCRIBERS[*]}"
+echo ":: ARE YOU SURE?"
 read
-ecco "REALY!?"
+echo ":: REALY!?"
 read
 
 TEMPFILE=`mktemp /tmp/DailyFortuneEmail.XXXXXXXXXXXX`
@@ -96,7 +96,7 @@ $output
 </html>
 " > $TEMPFILE
 
-	ecco "SENDING to $name"
+	echo ":: SENDING to $name"
 	cat $TEMPFILE
 
 	mail -s "$( echo -e "$subject\nContent-Type: text/html")" $name < $TEMPFILE

@@ -22,19 +22,19 @@ sub ecco
 # echo given warning
 sub eccow
 {
-	say YELLOW, "WARNING: @_", RESET;
+	say YELLOW, "@_", RESET;
 }
 
 # echo an error
 sub eccoe
 {
-	say RED, "ERROR: @_", RESET;
+	say RED, "@_", RESET;
 }
 
 # echo a success
 sub eccos
 {
-	say GREEN, "SUCCESS: @_", RESET;
+	say GREEN, "@_", RESET;
 }
 
 1; # True statement

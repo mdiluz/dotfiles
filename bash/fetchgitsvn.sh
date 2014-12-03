@@ -5,6 +5,7 @@
 # For hourly svn fetches, add the following lines to your crontab with "crontab -e" :                  
 # 0 * * * * "{dotfiles root}/bin/fetchgitsvn {directory}"
 #
+
 NAME=`basename $0`
 
 # Grab path
@@ -12,21 +13,21 @@ MYPATH=$1
 
 # Early out if no env variable
 if [ -z "$MYPATH" ]; then
-	eccoe no path passed to $NAME
+	echo ":ERROR: no path passed to $NAME"
 	exit 1
 fi
 
 # Early out if no root
 if [ ! -e "$MYPATH/.git/svn" ]; then
-	eccoe $MYPATH does not appear to be a git-svn repository
+	echo ":ERROR: $MYPATH does not appear to be a git-svn repository"
 	exit 1
 fi
 
 # Check if we're locked to prevent concurrent updating
 UPDATESVNLOCKFILE="/tmp/.fetchgitsvn_lock"
 if [ -e "$UPDATESVNLOCKFILE" ]; then
-	eccow $NAME already running 
-	eccow $UPDATESVNLOCKFILE still exists
+	echo ":WARNING: $NAME already running "
+	echo ":WARNING: $UPDATESVNLOCKFILE still exists "
 	exit 0
 fi
 
@@ -58,4 +59,4 @@ echo
 # Remove the lockfile
 rm $UPDATESVNLOCKFILE
 
-eccos $NAME finished
+echo ":SUCCESS: $NAME finished"
