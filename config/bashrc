@@ -32,34 +32,26 @@ PERL5LIB="$DOTFILESDIR/perl:$PERL5LIB"
 test -e ~/.feralrc && source ~/.feralrc
 
 # ======================================================================================================================
-# Set the PS1
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
 # Pull in my aliases
 test -f $DOTFILESDIR/config/bash_aliases && source $DOTFILESDIR/config/bash_aliases
 
-# If we have colour support
-if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-    color_prompt=yes
-else
-    color_prompt=
-fi
+# ======================================================================================================================
+# Set the PS1
 
 # Limit number of directories to 3
 PROMPT_DIRTRIM=3
 
+# Colours
+COLOUR_GREEN='\[\033[01;32m\]'
+COLOUR_BLUE='\[\033[01;34m\]'
+COLOUR_OFF='\[\033[00m\]'
+COLOUR_YELLOW='\[\033[0;33m\]'
+
 # Colour my prompt
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    PS1=$COLOUR_YELLOW[\\t]$COLOUR_GREEN\\u@\\h:$COLOUR_BLUE\\w$COLOUR_OFF\$\ 
 fi
 
-unset color_prompt
 
 # ======================================================================================================================
 

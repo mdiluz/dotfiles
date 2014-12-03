@@ -33,7 +33,7 @@ fixUpPaths( ($source,$destination) );
 # If dest and src are the same
 if ( $destination eq $source )
 {
-	eccoe "Source and Destination are the sahttps://enigma.feral.co.uk/websvn/comp.php?repname=gamedev&compare[]=%2F@81040&compare[]=%2F@81041&ignorews=1me";
+	eccoe "Source and Destination are the same";
 	eccoe $USAGE;
 	exit 1;
 }
