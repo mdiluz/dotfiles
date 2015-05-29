@@ -22,9 +22,9 @@ if [ ! -n "$SUBSCRIBERS" ]; then
 fi 
 
 echo ":: SENDING TO ${SUBSCRIBERS[*]}"
-echo ":: ARE YOU SURE?"
+echo -n ":: ARE YOU SURE?"
 read
-echo ":: REALY!?"
+echo -n ":: REALY!?"
 read
 
 TEMPFILE=`mktemp /tmp/DailyFortuneEmail.XXXXXXXXXXXX`
@@ -86,7 +86,7 @@ $output
 	
 </font>
 <font color="Black"></b>
-------------------------------------------------
+------------------------------------------
 <b> Your Daily Fortune</b> (tm) 
  Brought to you by <a href="$lnk">The Daily Fortune & Co</a>!
 </font>
@@ -99,6 +99,6 @@ $output
 	echo ":: SENDING to $name"
 	cat $TEMPFILE
 
-	mail -s "$( echo -e "$subject\nContent-Type: text/html")" $name < $TEMPFILE
-	eccos "SENT"
+	mail -s "$( echo -e "$subject\nContent-Type: text/html" )" $name < $TEMPFILE
+	echo "SENT"
 done
