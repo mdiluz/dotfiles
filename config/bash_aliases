@@ -45,11 +45,28 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Edit a file in qtcreator
 alias qtedit="qtcreator -client"
 
+# highlight part of a file
+function highlight()
+{
+	egrep --color "$1|$" $2
+}
+
 # OSX - check an apps codesigning
 alias checkcodesignosx="codesign -dvv --entitlements -"
 
 # OSX - quick fixes
 alias flushdnsosx="dscacheutil -flushcache"
 
-# Source in feral specific aliases if they exist
-test -e ~/.feral_aliases && source ~/.feral_aliases
+# Make an image from text
+function makeimage()
+{
+	FILE=$( mktemp "image_XXXXXX.jpg" )
+	echo "Making $FILE"
+	convert -fill white -pointsize 50 -background black label:"$*"  -flatten $FILE
+}
+
+# Watch youtube as ascii!
+function youtubeascii()
+{
+	youtube-dl http://www.youtube.com/watch?v=$1 -o - | mplayer -vo aa -monitorpixelaspect 0.5 - 
+}
