@@ -28,10 +28,6 @@ PATH="$DOTFILESDIR/bin:$PATH"
 PERL5LIB="$DOTFILESDIR/perl:$PERL5LIB"
 
 # ======================================================================================================================
-# Pull in feral specific stuff
-test -e ~/.feralrc && source ~/.feralrc
-
-# ======================================================================================================================
 # Pull in my aliases
 test -f $DOTFILESDIR/config/bash_aliases && source $DOTFILESDIR/config/bash_aliases
 
