@@ -42,21 +42,11 @@ cd $MYPATH
 
 # print the header
 echo ================$(date)================= 
-
-# Using nicely formatted git log a la https://coderwall.com/p/euwpig 
-git log --graph --pretty=format:'%h -%d %s (%cr) <%an>' --abbrev-commit -n 10 
-# echo here since git log doesn't end in a new line
-echo 
-echo ===========================FETCH============================= 
 # Fetch from svn
 git svn fetch 
 echo ============================END============================== 
-echo 
 
-# tee the output into a log file in the home directory
-} | tee -a "/tmp/fetchgitsvn_log.txt"
+} 
 
 # Remove the lockfile
 rm $UPDATESVNLOCKFILE
-
-echo ":SUCCESS: $NAME finished"
