@@ -57,7 +57,7 @@ sub removeAllChildDirectories
 sub recursivelyUpdateSVN
 {
 	ecco "Fetching all svn working copies";
-	our @dirs = getAllDirectories(shift or getcwd,".svn");
+	our @dirs = getAllDirectories(getcwd or $_,".svn");
 
 	# Remove all .svn components of paths
 	foreach my $dir (@dirs)

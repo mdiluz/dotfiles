@@ -1,0 +1,9 @@
+#! /bin/bash
+src="$1"
+dst="$2"
+mkdir -p "$dst"     &&   \
+cp -r "$src" "$dst" &&   \
+cd "$dst" &&             \
+git init  &&             \
+git add . &&             \
+git commit -m "$(date)"

@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-our $files = `git status @ARGV`;
+our $files = `git status -uno @ARGV`;
 
 our @filteredfiles = ($files =~ /^\s+modified:\s+(.*)$/gm );
 

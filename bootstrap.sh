@@ -6,5 +6,3 @@ export DOTFILESDIR=$DIR
 source \$DOTFILESDIR/config/bashrc"
 
 echo "$TEXT" >> ~/.bashrc
-
-# TODO: Test setup worked with new shell
