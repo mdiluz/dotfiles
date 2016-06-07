@@ -1,0 +1,1 @@
+/feraldev/src/trunk/Companies/Feral/Development/Resources/Scripts/Users/mdiluzio/fish/functions/fish_right_prompt.fish
