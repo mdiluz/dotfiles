@@ -73,13 +73,13 @@ export NINJA_STATUS='[%p|%f/%t|%c/s|%es] '
 # Use tmux by defualt here
 function tmux-attach {
 	if command -v tmux>/dev/null; then
- 	if [[ ! $TERM =~ screen ]] && [ -z $TMUX ]; then
-        	SESSION=$( tmux ls -F '#{session_name} #{?session_attached,attached,unattached}' | grep unattached | head -n 1 | awk '{print $1}' )
-        	if [[ ! -z $SESSION ]]; then
-                	tmux a -t $SESSION
-        	else
-                	tmux
-        	fi
-  	fi
+	if [[ ! $TERM =~ screen ]] && [ -z $TMUX ]; then
+		SESSION=$( tmux ls -F '#{session_name} #{?session_attached,attached,unattached}' | grep unattached | head -n 1 | awk '{print $1}' )
+		if [[ ! -z $SESSION ]]; then
+			tmux a -t $SESSION
+		else
+			tmux
+		fi
+		fi
 	fi
 }
