@@ -73,3 +73,9 @@ function youtubeascii()
 
 # listen to radiosidewinder
 alias radiosidewinder="mplayer http://streaming.radionomy.com/Radio-Sidewinder"
+
+# Use vimx for clipboard support
+if [ -f /usr/bin/vimx ]; then
+	alias vim=vimx
+fi
+

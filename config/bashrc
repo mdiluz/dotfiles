@@ -17,8 +17,8 @@ HISTFILESIZE=2000
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
-# Set my editor to nano
-export EDITOR=nano
+# Set my editor to vim
+export EDITOR=vim
 
 # Add custom bin
 PATH="$HOME/bin:$PATH"
