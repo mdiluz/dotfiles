@@ -28,11 +28,6 @@ function __fish_ms_to_human -d "Get last command duration in human readable form
 		set __string ( printf "%s%sms" $__string $__time_ms_left )
 	end
 
-	# If empty use a simple bullet
-	if [ ( string length "$__string" ) -eq 0  ]
-		set __string "•"
-	end
-
 	# output the string
 	echo -n $__string
 
