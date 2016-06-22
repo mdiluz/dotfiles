@@ -11,15 +11,15 @@ if [ ! $( which cowsay ) ]; then
 	exit 1
 fi
 
-if [ ! $( which jot ) ]; then
-	echo ":ERROR: jot not installed"
+if [ ! $( which enum ) ]; then
+	echo ":ERROR: enum not installed"
 	exit 1
 fi
 
 if [ ! -n "$SUBSCRIBERS" ]; then
-	echo ":ERROR: must set \$SUBSCRIBERS to array at top of this file"
+	echo ":ERROR: must set \$SUBSCRIBERS "
 	exit 1
-fi 
+fi
 
 echo ":: SENDING TO ${SUBSCRIBERS[*]}"
 echo -n ":: ARE YOU SURE?"
@@ -31,8 +31,8 @@ TEMPFILE=`mktemp /tmp/DailyFortuneEmail.XXXXXXXXXXXX`
 
 for name in ${SUBSCRIBERS[@]}; do
 
-	# Random modifier for the coß
-	case `jot -r 1 0 9` in
+	# Random modifier for the cow
+	case `enum -r 0 8` in
 		0) arg="" ;;
 		1) arg="-b" ;;
 		2) arg="-d" ;;
@@ -45,21 +45,20 @@ for name in ${SUBSCRIBERS[@]}; do
 	esac
 
 	# Random text colour
-	case `jot -r 1 0 9` in
+	case `enum -r 0 8` in
 		0) colour="Red" ;;
 		1) colour="Blue" ;;
 		2) colour="Green" ;;
-		3) colour="Yellow" ;;
-		4) colour="Pink" ;;
-		5) colour="Orange" ;;
-		6) colour="Purple" ;;
-		7) colour="Gold" ;;
-		8) colour="Chocolate" ;;
-		9) colour="Charteuse" ;;
+		3) colour="Pink" ;;
+		4) colour="Orange" ;;
+		5) colour="Purple" ;;
+		6) colour="Gold" ;;
+		7) colour="Chocolate" ;;
+		8) colour="Charteuse" ;;
 	esac	
 
 	# Random website link
-	case `jot -r 1 0 6` in
+	case `enum -r 0 6` in
 		0) lnk="http://en.wikipedia.org/wiki/Kermit_the_Frog" ;;
 		1) lnk="http://en.wikipedia.org/wiki/Kermit_Roosevelt" ;;
 		2) lnk="http://en.wikipedia.org/wiki/Kermit,_Texas" ;;
