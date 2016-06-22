@@ -1,8 +1,15 @@
 #! /bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-TEXT="# Auto added by ${BASH_SOURCE[0]} on $(date)
+# bashrc setup
+TEXT="# Add my dotfiles configuration
 export DOTFILESDIR=$DIR
 source \$DOTFILESDIR/config/bashrc"
+echo "Add the following to .bashrc :"
+echo "$TEXT"
+echo ""
 
-echo "$TEXT" >> ~/.bashrc
+# Extra commands
+echo "Run the following commands after checking them"
+echo "ln -s \"$dir/config/vimrc\" \"~/.vimrc\""
+echo "ln -s \"$dir/config/tmux.conf\" \"~/.tmux.conf\""
