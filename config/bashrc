@@ -38,18 +38,12 @@ test -f $DOTFILESDIR/config/bash_aliases && source $DOTFILESDIR/config/bash_alia
 PROMPT_DIRTRIM=3
 
 # Colours
-COLOUR_GREEN='\[\033[01;32m\]'
-COLOUR_BLUE='\[\033[01;34m\]'
+COLOUR_TERM='\[\033[01;36m\]'
 COLOUR_OFF='\[\033[00m\]'
-COLOUR_YELLOW='\[\033[0;33m\]'
 	
 # Colour my prompt
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-
-    PLAT="unknown"
-    test -e /etc/issue && PLAT="$(head -n 1 /etc/issue | grep -Eo '^\w+')"
-    test -e /etc/apt/sources.list.d/steamrt.list && PLAT="$PLAT-STM-$(uname -m)"
-    PS1="$COLOUR_YELLOW\\t$COLOUR_BLUE $PLAT $COLOUR_GREEN\\u@\\h$COLOUR_YELLOW:$COLOUR_BLUE\\w$COLOUR_OFF \j\n$ "
+    PS1="$COLOUR_TERM\\t \\u@\\h:\\w$COLOUR_OFF \j\n$ "
 fi
 
 
