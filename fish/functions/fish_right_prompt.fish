@@ -5,8 +5,7 @@ function fish_right_prompt -d "Write out the right prompt"
 	set -l __last_cmd $history[1]
 
 	# test for string
-	__fish_test_string
-	if test $__fish_has_string
+	if __fish_test_string 
 		# format the last command
 		# Remove a trailing space
 		set __last_cmd ( string replace -r " \$" "" $__last_cmd)
