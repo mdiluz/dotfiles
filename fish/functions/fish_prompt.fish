@@ -47,11 +47,12 @@ function fish_prompt --description 'Write out the prompt'
 	end
 
 	# Assemble our top and bottom lines
-	set __prompt_full_top $__prompt_base"%s:%s"(prompt_pwd)"\n"
+	set __prompt_full_top $__prompt_base"%s:%s"$__prompt_pwd"\n"
 	set __prompt_bottom_line "%s╚═%s "
 
 	# Choose colour
-	set __main_color 004488
+	set __main_color 888888
+	set __main_highlight_color 004488
 	set __decoration_colour 444444 
 	if test $__last_status -gt 0
 		set __decoration_colour red
@@ -61,7 +62,8 @@ function fish_prompt --description 'Write out the prompt'
 	printf $__prompt_full_top (set_color $__decoration_colour) \
 	                          (set_color $__main_color) \
 	                          (set_color $__decoration_colour) \
-	                          (set_color -o $__main_color)
+	                          (set_color -o $__main_color) \
+	                          (set_color -o $__main_highlight_color)
 
 	printf $__prompt_bottom_line (set_color $__decoration_colour) \
 	                             (set_color normal)
