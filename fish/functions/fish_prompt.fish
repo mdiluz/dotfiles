@@ -32,7 +32,7 @@ function fish_prompt --description 'Write out the prompt'
 	end
 
 	set __prompt_pwd (prompt_pwd)
-	if __fish_test_string 
+	if type -q string 
 		set __prompt_pwd_parts ( string split -m 1 -r '/' $__prompt_pwd )
 		if [ (count $__prompt_pwd_parts) -gt 1 ]
 			set __prompt_pwd $__prompt_pwd_parts[1]"/%s"$__prompt_pwd_parts[2]
