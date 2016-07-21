@@ -19,3 +19,7 @@ function --on-event fish_postexec __notify_long_command
     end 
 end
 
+# Source in local specific fish functions
+if test -f ~/.config/fish/local.fish
+	source ~/.config/fish/local.fish
+end
