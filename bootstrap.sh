@@ -18,8 +18,9 @@ ln -s "$DIR/config/tmux.conf" ~/.tmux.conf
 # Linking fish
 echo "Linking fish"
 FISHDIR=~/.config/fish
-ln -s $DIR/fish/config.fish $FISHDIR
+mkdir -p $FISHDIR
+ln -s $DIR/fish/config.fish $FISHDIR/
 for FISHES in $( find $DIR/fish/ -maxdepth 1 -mindepth 1 -type d -printf "%f\n" ); do
 	mkdir -p $FISHDIR/$FISHES
-	ln -s $DIR/fish/$FISHES/* $FISHDIR/$FISHES
+	ln -s $DIR/fish/$FISHES/* $FISHDIR/$FISHES/
 done
