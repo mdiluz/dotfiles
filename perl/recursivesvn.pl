@@ -72,7 +72,10 @@ sub recursivelyUpdateSVN
 	# Call svn update on each directory
 	foreach our $dir (sort @dirs)
 	{
-		system("svn","update",$dir);
+		if( not -e "$dir/exclude_from_autoupdate" )
+		{
+			system("svn","update",$dir);
+		}
 	}
 }
 recursivelyUpdateSVN @ARGV;
