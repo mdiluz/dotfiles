@@ -18,8 +18,10 @@ ln -s "$DIR/config/tmux.conf" ~/.tmux.conf
 # Linking fish
 echo "Linking fish"
 FISHDIR=~/.config/fish
-ln -s $DIR/fish/config.fish $FISHDIR
-for FISHES in $( find $DIR/fish/ -maxdepth 1 -mindepth 1 -type d -printf "%f\n" ); do
-	mkdir -p $FISHDIR/$FISHES
-	ln -s $DIR/fish/$FISHES/* $FISHDIR/$FISHES
-done
+ln -s "$DIR/fish/config.fish" $FISHDIR
+while IFS= read -r -d '' FISHES
+do
+	FISHNAME=$( basename "$FISHES" )
+	echo mkdir -p "$FISHDIR/$FISHNAME"
+	echo ln -s "$DIR/fish/$FISHNAME/"* "$FISHDIR/$FISHNAME"
+done < <( find "$DIR/fish/" -maxdepth 1 -mindepth 1 -type d -print0 )
