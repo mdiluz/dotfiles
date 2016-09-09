@@ -12,6 +12,10 @@ set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 " set tab length to 4
 set tabstop=4
 
+" set up shiftwidths
+set shiftwidth=4
+set softtabstop=4
+
 " set visual autocomplete
 set wildmenu
 
@@ -34,12 +38,22 @@ set list
 set listchars=tab:▸\ ,trail:·,extends:>,precedes:<
 
 " Map buttons to remove and add line numbers, useful for quick copy/paste
-map <F2> :set nonumber norelativenumber<CR>
-map <F3> :set number relativenumber<CR>
+map <F10> :set nonumber norelativenumber<CR>
+map <F9> :set number relativenumber<CR>
 
 " Map to show and remove whitespace
-map <F5> :set nolist<CR>
-map <F6> :set list<CR>
+map <F7> :set nolist<CR>
+map <F8> :set list<CR>
 
 " use the system clipboard
 set clipboard=unnamedplus
+
+" turn off arrow keys
+" map <up> <nop>
+" map <down> <nop>
+" map <left> <nop>
+" map <right> <nop>
+
+" Custom quick build and test
+command Test w |! bash -c 'c++ --std=c++11 % && ./a.out'
+map <F5> :Test<CR>
