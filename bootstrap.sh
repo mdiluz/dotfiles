@@ -14,6 +14,8 @@ fi
 echo "Linking configs"
 ln -s "$DIR/config/vimrc" ~/.vimrc
 ln -s "$DIR/config/tmux.conf" ~/.tmux.conf
+mkdir "~/.config/alacritty/"
+ln -s "$DIR/config/alacritty.conf" ~/.config/alacritty/
 
 # Linking fish
 echo "Linking fish"

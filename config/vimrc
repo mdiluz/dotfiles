@@ -48,6 +48,9 @@ map <F8> :set list<CR>
 " use the system clipboard
 set clipboard=unnamedplus
 
+" turn off mouse support
+set mouse=
+
 " turn off arrow keys
 " map <up> <nop>
 " map <down> <nop>
