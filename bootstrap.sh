@@ -15,15 +15,15 @@ echo "Linking configs"
 ln -s "$DIR/config/vimrc" ~/.vimrc
 ln -s "$DIR/config/tmux.conf" ~/.tmux.conf
 mkdir "~/.config/alacritty/"
-ln -s "$DIR/config/alacritty.conf" ~/.config/alacritty/
+ln -s "$DIR/config/alacrity.yml" ~/.config/
 
 # Linking fish
 echo "Linking fish"
-FISHDIR=~/.config/fish
+FISHDIR=~/.config/fish/
 ln -s "$DIR/fish/config.fish" $FISHDIR
 while IFS= read -r -d '' FISHES
 do
 	FISHNAME=$( basename "$FISHES" )
-	echo mkdir -p "$FISHDIR/$FISHNAME"
-	echo ln -s "$DIR/fish/$FISHNAME/"* "$FISHDIR/$FISHNAME"
+	mkdir -p "$FISHDIR/$FISHNAME"
+	ln -s "$DIR/fish/$FISHNAME/"* "$FISHDIR/$FISHNAME"
 done < <( find "$DIR/fish/" -maxdepth 1 -mindepth 1 -type d -print0 )
