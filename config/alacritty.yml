@@ -8,8 +8,6 @@ dpi:
 
 # Display tabs using this many cells (changes require restart)
 tabspaces: 8
-
-# When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
 
 # Font configuration (changes require restart)
@@ -17,22 +15,10 @@ font:
   # The normal (roman) font face to use.
   normal:
     family: monospace # should be "Menlo" or something on macOS.
-    # Style can be specified to pick a specific face.
-    # style: Regular
-
-  # The bold font face
   bold:
     family: monospace # should be "Menlo" or something on macOS.
-    # Style can be specified to pick a specific face.
-    # style: Bold
-
-  # The italic font face
   italic:
     family: monospace # should be "Menlo" or something on macOS.
-    # Style can be specified to pick a specific face.
-    # style: Italic
-
-  # Point size of the font
   size: 10.0
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -52,7 +38,7 @@ render_timer: false
 # and cursor.background colors, otherwise invert the colors of the cursor.
 custom_cursor_colors: false
 
-# Colors (Tomorrow Night Bright)
+# Colors (Custom - Tomorrow Night Bright)
 colors:
   # Default colors
   primary:
@@ -84,35 +70,6 @@ colors:
     cyan:    '0x54ced6'
     white:   '0x2a2a2a'
 
-# Colors (Solarized Dark)
-#colors:
-#  # Default colors
-#  primary:
-#    #background: '0x002b36'
-#    background: '0x232729'
-#    foreground: '0x839496'
-#
-#  # Normal colors
-#  normal:
-#    black:   '0x073642'
-#    red:     '0xdc322f'
-#    green:   '0x859900'
-#    yellow:  '0xb58900'
-#    blue:    '0x268bd2'
-#    magenta: '0xd33682'
-#    cyan:    '0x2aa198'
-#    white:   '0xeee8d5'
-#
-#  # Bright colors
-#  bright:
-#    black:   '0x002b36'
-#    red:     '0xcb4b16'
-#    green:   '0x586e75'
-#    yellow:  '0x657b83'
-#    blue:    '0x839496'
-#    magenta: '0x6c71c4'
-#    cyan:    '0x93a1a1'
-#    white:   '0xfdf6e3'
 
 # Key bindings
 #
@@ -171,7 +128,9 @@ key_bindings:
   - { key: Down,     mods: Alt,     chars: "\x1b[1;3B"                   }
   - { key: Down,                    chars: "\x1b[B",   mode: ~AppCursor  }
   - { key: Down,                    chars: "\x1bOB",   mode: AppCursor   }
+
   - { key: Tab,      mods: Shift,   chars: "\x1b[Z"                      }
+
   - { key: F1,                      chars: "\x1bOP"                      }
   - { key: F2,                      chars: "\x1bOQ"                      }
   - { key: F3,                      chars: "\x1bOR"                      }
@@ -208,10 +167,6 @@ mouse_bindings:
 
 
 # Shell
-#
-# You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
-# Entries in shell.args are passed unmodified as arguments to the shell.
-#
 shell:
   program: /usr/bin/tmux
   args:
