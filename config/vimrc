@@ -58,5 +58,5 @@ set mouse=
 " map <right> <nop>
 
 " Custom quick build and test
-command Test w |! bash -c 'c++ --std=c++11 % && ./a.out'
+command Test w |! bash -c 'c++ --std=c++11 -O3 % && ./a.out'
 map <F5> :Test<CR>
