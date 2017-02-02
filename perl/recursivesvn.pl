@@ -75,6 +75,7 @@ sub recursivelyUpdateSVN
 		if( not -e "$dir/exclude_from_autoupdate" )
 		{
 			system("svn","update",$dir);
+			system("svn","cleanup",$dir);
 		}
 	}
 }

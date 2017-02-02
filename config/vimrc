@@ -48,6 +48,9 @@ map <F8> :set list<CR>
 " use the system clipboard
 set clipboard=unnamedplus
 
+" turn off mouse support
+set mouse=
+
 " turn off arrow keys
 " map <up> <nop>
 " map <down> <nop>
@@ -55,5 +58,5 @@ set clipboard=unnamedplus
 " map <right> <nop>
 
 " Custom quick build and test
-command Test w |! bash -c 'c++ --std=c++11 % && ./a.out'
+command Test w |! bash -c 'c++ --std=c++11 -O3 % && ./a.out'
 map <F5> :Test<CR>
