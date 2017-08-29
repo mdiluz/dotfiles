@@ -7,7 +7,7 @@ if test -f /etc/profile.d/autojump.fish
 end
 
 # Notify on extra long functions
-function --on-event fish_postexec __notify_long_command
+function __notify_long_command --on-event fish_postexec
     if math "$CMD_DURATION > 5000" > /dev/null
         set -l __last_cmd $argv
         if type -q notify-send
