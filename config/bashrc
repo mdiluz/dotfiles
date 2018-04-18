@@ -20,6 +20,9 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 # Set my editor to vim
 export EDITOR=vim
 
+# Open gdb in quiet mode
+alias gdb='gdb -q'
+
 # Add custom bin
 PATH="$HOME/bin:$PATH"
 
