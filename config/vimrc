@@ -60,3 +60,7 @@ set mouse=
 " Custom quick build and test
 command Test w |! bash -c 'c++ --std=c++11 -O3 % && ./a.out'
 map <F5> :Test<CR>
+
+" Automatically save-restore view status of file
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
