@@ -43,15 +43,8 @@ function fish_prompt --description 'Write out the prompt'
 		set __prompt_pwd "%s"$__prompt_pwd
 	end
 
-	set __prompt_hg ""
-	if __find_hg_root
-		set __hg_branch ( cat $HG_ROOT/.hg/branch )
-		set __prompt_hg ( printf ' (%s)' $__hg_branch )
-	end
-		
-
 	# Assemble our top and bottom lines
-	set __prompt_full_top $__prompt_base"%s:%s"$__prompt_pwd$__prompt_hg"\n"
+	set __prompt_full_top $__prompt_base"%s:%s"$__prompt_pwd"\n"
 	set __prompt_bottom_line "%s╚═%s "
 
 	# Choose colour
