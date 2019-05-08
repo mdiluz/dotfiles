@@ -8,7 +8,7 @@ end
 
 # Notify on extra long functions
 function __notify_long_command --on-event fish_postexec
-    if math "$CMD_DURATION > 5000" > /dev/null
+    if test "$CMD_DURATION" -gt "5000" > /dev/null
         set -l __last_cmd $argv
         if type -q notify-send
             notify-send "cmd done" "$__last_cmd"

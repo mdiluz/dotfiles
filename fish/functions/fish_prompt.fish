@@ -25,7 +25,7 @@ function fish_prompt --description 'Write out the prompt'
 
 	# Sort out the CWD shortened only if needed
 	set __prompt_command_len (echo $__prompt_base $PWD | sed -r "s/%s//g" | wc -m)
-	if math "$__prompt_command_len>$COLUMNS" > /dev/null
+	if test "$__prompt_command_len" -gt "$COLUMNS" > /dev/null
 		set -g fish_prompt_pwd_dir_length 1
 	else
 		set -g fish_prompt_pwd_dir_length 0
