@@ -26,3 +26,14 @@ end
 
 # Shut up gdb
 alias gdb "gdb -q"
+
+# Shut up the fish greeting
+set fish_greeting
+
+# Use vim
+set -x EDITOR vim
+
+# Set up custom paths
+set DOTFILESDIR ~/dotfiles/
+set -x PATH $HOME/bin $DOTFILESDIR/bin $PATH
+set -x PERL5LIB $DOTFILESDIR/perl $PERL5LIB
