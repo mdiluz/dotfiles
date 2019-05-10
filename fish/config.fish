@@ -37,3 +37,6 @@ set -x EDITOR vim
 set DOTFILESDIR ~/dotfiles/
 set -x PATH $HOME/bin $DOTFILESDIR/bin $PATH
 set -x PERL5LIB $DOTFILESDIR/perl $PERL5LIB
+
+# Use direnv
+direnv hook fish | source

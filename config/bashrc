@@ -80,3 +80,6 @@ function tmux-attach {
 		fi
 	fi
 }
+
+# Use direnv
+eval "$(direnv hook bash)"
