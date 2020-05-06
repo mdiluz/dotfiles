@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ======================================================================================================================
+# ==========================================================
 # If not running interactively, don't do anything
 test -z "$PS1" && return
 
@@ -30,11 +30,11 @@ PATH="$HOME/bin:$PATH"
 PATH="$DOTFILESDIR/bin:$PATH"
 PERL5LIB="$DOTFILESDIR/perl:$PERL5LIB"
 
-# ======================================================================================================================
+# ==========================================================
 # Pull in my aliases
 test -f $DOTFILESDIR/config/bash_aliases && source $DOTFILESDIR/config/bash_aliases
 
-# ======================================================================================================================
+# ==========================================================
 # Set the PS1
 
 # Limit number of directories to 3
@@ -43,14 +43,14 @@ PROMPT_DIRTRIM=3
 # Colours
 COLOUR_TERM='\[\033[01;36m\]'
 COLOUR_OFF='\[\033[00m\]'
-	
+
 # Colour my prompt
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     PS1="$COLOUR_TERM\\t \\u@\\h:\\w$COLOUR_OFF \j\n$ "
 fi
 
 
-# ======================================================================================================================
+# ==========================================================
 
 # enable programmable completion features by default
 if ! shopt -oq posix; then
@@ -60,26 +60,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-
-# ======================================================================================================================
-# Change NINJA STATUS
-export NINJA_STATUS='[%p|%f/%t|%c/s|%es] '
-
-# ======================================================================================================================
-# Use tmux by defualt here
-function tmux-attach {
-	if command -v tmux>/dev/null; then
-	if [[ ! $TERM =~ screen ]] && [ -z $TMUX ]; then
-		SESSION=$( tmux ls -F '#{session_name} #{?session_attached,attached,unattached}' | grep unattached | head -n 1 | awk '{print $1}' )
-		if [[ ! -z $SESSION ]]; then
-			tmux a -t $SESSION
-		else
-			tmux
-		fi
-		fi
-	fi
-}
 
 # Use direnv
 eval "$(direnv hook bash)"

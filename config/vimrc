@@ -23,9 +23,6 @@ set wildmenu
 set incsearch
 set hlsearch
 
-" use 0 for first non whitespace (otherwise it's kinda annoying in code
-map 0 ^
-
 " set relative line numbers for commands
 set number
 set relativenumber
@@ -45,17 +42,8 @@ map <F9> :set number relativenumber<CR>
 map <F7> :set nolist<CR>
 map <F8> :set list<CR>
 
-" use the system clipboard
-set clipboard=unnamedplus
-
 " turn off mouse support
 set mouse=
-
-" turn off arrow keys
-" map <up> <nop>
-" map <down> <nop>
-" map <left> <nop>
-" map <right> <nop>
 
 " Custom quick build and test
 command Test w |! bash -c 'c++ --std=c++11 -O3 % && ./a.out'
