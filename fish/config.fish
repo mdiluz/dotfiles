@@ -2,8 +2,8 @@
 set -g MANPAGER most
 
 # Source in autojump
-if test -f /etc/profile.d/autojump.fish
-	source /etc/profile.d/autojump.fish
+if test -f /usr/share/autojump/autojump.fish
+	source /usr/share/autojump/autojump.fish
 end
 
 # Source in local specific fish functions
