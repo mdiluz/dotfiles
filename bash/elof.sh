@@ -18,7 +18,7 @@ if [ -e $cmd ]; then
 fi
 
 # Perform the command on each line
-while read line           
-do           
-    eval "$cmd $line"           
+while read line
+do
+	eval "$cmd $line"
 done <$file

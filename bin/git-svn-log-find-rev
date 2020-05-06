@@ -1,4 +1,1 @@
-#!/usr/bin/perl
-use strict;
-use warnings;
-
+../perl/git-svn-log-find-rev.pl
