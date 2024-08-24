@@ -29,6 +29,5 @@ do
 done < <( find "$DIR/fish/" -maxdepth 1 -mindepth 1 -type d -print0 )
 
 # Ensure we have git lg
-git config --global user.name "Marc Di Luzio" # purposely leave email blank
 git config --global core.excludesfile "$DIR/config/gitignore"
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
