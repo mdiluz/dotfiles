@@ -52,3 +52,6 @@ map <F5> :Test<CR>
 " Automatically save-restore view status of file
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
+
+" Use spaces for tabs in python
+au BufRead,BufNewFile *.py set expandtab
