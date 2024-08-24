@@ -1,6 +1,9 @@
 #! /bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# Install dependencies
+sudo apt install -y tmux fish direnv git vim
+
 # bashrc setup
 TEXT="# Dotfile configuration
 export DOTFILESDIR=$DIR
